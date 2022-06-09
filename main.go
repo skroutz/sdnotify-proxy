@@ -94,7 +94,7 @@ func main() {
 	proxySock := os.Args[1]
 
 	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGCHLD)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGCHLD, syscall.SIGUSR2, syscall.SIGQUIT, syscall.SIGABRT)
 
 	// replace NOTIFY_SOCKET with the proxy socket
 	os.Setenv("NOTIFY_SOCKET", proxySock)
@@ -120,8 +120,8 @@ func main() {
 		sig := <-sigs
 
 		switch sig {
-		case syscall.SIGINT, syscall.SIGTERM:
-			// propogate to child
+		case syscall.SIGINT, syscall.SIGTERM, syscall.SIGUSR2, syscall.SIGQUIT, syscall.SIGABRT:
+			// propagate to child
 			proc.Signal(sig)
 
 		case syscall.SIGCHLD:
