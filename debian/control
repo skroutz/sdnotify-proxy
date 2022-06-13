@@ -1,0 +1,15 @@
+Source: sdnotify-proxy
+Section: admin
+Priority: optional
+Maintainer: Service Foundations Team <service-foundations@teams.skroutz.gr>
+Build-Depends: debhelper-compat (= 12),
+               golang
+Standards-Version: 4.5.1
+Vcs-Browser: https://github.com/skroutz/sdnotify-proxy
+Vcs-Git: https://github.com/skroutz/sdnotify-proxy.git
+Rules-Requires-Root: no
+
+Package: sdnotify-proxy
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: sdnotify-proxy proxies events between Docker containers and systemd.
